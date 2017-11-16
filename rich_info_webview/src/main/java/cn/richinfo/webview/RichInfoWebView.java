@@ -1,4 +1,4 @@
-package cn.richinfo.richinfowebview;
+package cn.richinfo.webview;
 
 import android.content.Context;
 import android.util.AttributeSet;

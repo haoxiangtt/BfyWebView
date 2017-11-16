@@ -22,12 +22,13 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
 }
 
-def BASENAME = "multiFuncListView";
+def BASENAME = "richInfoWebView";
 def sdkDestinationPath = "build/outputs/jar/";
 android.libraryVariants.all { variant ->
+    def finalName = "${BASENAME}-${variant.name}-v${variant.mergedFlavor.versionName}"
     def deleteBuild = tasks.create(name : "delete${variant.name}Jar",
             type : Delete) {
-        delete "${sdkDestinationPath}${BASENAME}-${variant.name}.jar"
+        delete "${sdkDestinationPath}${finalName}.jar"
     }
     tasks.create(name : "makeJar${variant.name.capitalize()}",
             dependsOn : [deleteBuild, variant.assemble],
@@ -35,9 +36,11 @@ android.libraryVariants.all { variant ->
 //        def zfile = file("build/intermediates/bundles/${variant.name}/classes.jar")
 //        from zipTree(zfile)
         from "build/intermediates/classes/${variant.name}"
-        baseName "${BASENAME}-${variant.name}"
+        baseName finalName
         destinationDir file(sdkDestinationPath)
         exclude "android/support/**/*.class"
+        exclude "**/R.class"
+        exclude "**/R\$*.class"
         include "cn/richinfo/**/*.class"
     }
 }

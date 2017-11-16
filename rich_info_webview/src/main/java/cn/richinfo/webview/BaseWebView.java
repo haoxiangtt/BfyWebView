@@ -1,4 +1,4 @@
-package cn.richinfo.richinfowebview;
+package cn.richinfo.webview;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
