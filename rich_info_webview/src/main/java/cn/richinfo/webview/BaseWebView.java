@@ -12,6 +12,7 @@ import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.webkit.CookieManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
@@ -34,7 +35,6 @@ public abstract class BaseWebView extends WebView {
     protected static final boolean DEBUG = BuildConfig.DEBUG;
 
 	private static final int HANDLER_WHAT_CALL_JS = 0;
-    protected WebSettings webSettings;
     private static final String APP_CACAHE_DIRNAME = "/rich_webcache";//文件缓存目录
 
     private static final String USER_AGENT_1 = "rich";          //标识是否在wentianji应用内
@@ -100,10 +100,15 @@ public abstract class BaseWebView extends WebView {
 		setHorizontalScrollBarEnabled(false);
 		setVerticalScrollBarEnabled(false);
 		setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-    	
-        webSettings = getSettings();
+
+		WebSettings webSettings = getSettings();
 
         webSettings.setJavaScriptEnabled(true);//允许调用JavaScript
+		webSettings.setDatabaseEnabled(true);//启用数据库
+		if (Build.VERSION.SDK_INT < 19) {
+			String dir = context.getApplicationContext().getDir("database", Context.MODE_PRIVATE).getPath();
+			webSettings.setDatabasePath(dir);
+		}
 		webSettings.setPluginState(WebSettings.PluginState.ON);
 
 		/**
@@ -129,8 +134,17 @@ public abstract class BaseWebView extends WebView {
 		webSettings.setAppCachePath(appCacheDir);//设置缓存路径
 		webSettings.setAppCacheEnabled(true);// 设置开启缓存
 		if(Build.VERSION.SDK_INT < 18) {
-			webSettings.setAppCacheMaxSize(1024 * 1024 * 3);// 设置缓冲大小
+			webSettings.setAppCacheMaxSize(1024 * 1024 * 10);// 设置缓冲大小
 		}
+
+		//启用cookie
+		if (Build.VERSION.SDK_INT >= 21) {
+			webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+			CookieManager.getInstance().setAcceptThirdPartyCookies(this, true);
+		} else {
+			CookieManager.getInstance().setAcceptCookie(true);
+		}
+
 		webSettings.setAllowFileAccess(true);// 允许访问文件
         //支持跨域访问文件( >=Build.VERSION_CODES.JELLY_BEAN )
         if (Build.VERSION.SDK_INT >= 16) {
