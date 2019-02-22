@@ -1,4 +1,4 @@
-package cn.richinfo.webview;
+package cn.bfy.webview;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

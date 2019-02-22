@@ -1,4 +1,4 @@
-package cn.richinfo.demo;
+package cn.bfy.demo;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
