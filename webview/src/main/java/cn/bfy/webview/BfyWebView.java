@@ -16,21 +16,21 @@ import android.util.AttributeSet;
  * </pre>
  */
 
-public class RichInfoWebView extends BaseWebView {
+public class BfyWebView extends BaseWebView {
 
-    public RichInfoWebView(Context context) {
+    public BfyWebView(Context context) {
         this(context, null);
     }
 
-    public RichInfoWebView(Context context, AttributeSet attrs) {
+    public BfyWebView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public RichInfoWebView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public BfyWebView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
-    public RichInfoWebView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public BfyWebView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 }

@@ -23,7 +23,7 @@
             android:text="加载"/>
     </LinearLayout>
 
-    <cn.bfy.webview.RichInfoWebView
+    <cn.bfy.webview.BfyWebView
         android:id="@+id/webview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
