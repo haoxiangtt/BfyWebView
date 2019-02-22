@@ -9,7 +9,7 @@ webview控件说明：
 		android:layout_height="match_parent"
 		tools:context="cn.richinfo.demo.MainActivity">
 
-		<cn.richinfo.webview.RichInfoWebView
+		<cn.richinfo.webview.BfyWebView
 			android:id="@+id/webview"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"/>
